@@ -1,4 +1,4 @@
-const { readSignups, clearSignups, getSignupStats } = require('../../utils/signup-store');
+const { fetchMySignups } = require('../../utils/services/public-service');
 
 Page({
   data: {
@@ -11,36 +11,50 @@ Page({
     }
   },
 
-  onShow() {
-    this.loadRecords();
+  async onShow() {
+    await this.loadRecords();
   },
 
-  loadRecords() {
-    this.setData({
-      records: readSignups(),
-      stats: getSignupStats()
-    });
+  async loadRecords() {
+    try {
+      const records = await fetchMySignups();
+      const stats = records.reduce(
+        (acc, item) => {
+          acc.total += 1;
+          if (item.businessType === 'course') {
+            acc.course += 1;
+          } else if (item.businessType === 'activity') {
+            acc.activity += 1;
+          } else {
+            acc.general += 1;
+          }
+          return acc;
+        },
+        {
+          total: 0,
+          course: 0,
+          activity: 0,
+          general: 0
+        }
+      );
+
+      this.setData({
+        records,
+        stats
+      });
+    } catch (error) {
+      wx.showToast({
+        title: error.message || '报名记录加载失败',
+        icon: 'none'
+      });
+    }
   },
 
   clearRecords() {
-    if (!this.data.records.length) {
-      return;
-    }
-
     wx.showModal({
-      title: '清空报名记录',
-      content: '确认清空当前本地演示数据吗？',
-      success: ({ confirm }) => {
-        if (!confirm) {
-          return;
-        }
-        clearSignups();
-        this.loadRecords();
-        wx.showToast({
-          title: '已清空',
-          icon: 'success'
-        });
-      }
+      title: '云端报名记录',
+      content: '报名记录已存储到云端，请在管理端进行跟进和状态管理。',
+      showCancel: false
     });
   }
 });

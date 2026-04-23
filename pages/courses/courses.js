@@ -1,4 +1,4 @@
-const { getCourses, getCourseCategories } = require('../../utils/data');
+const { listCourses } = require('../../utils/services/public-service');
 
 Page({
   data: {
@@ -8,15 +8,31 @@ Page({
     filteredCourses: []
   },
 
-  onLoad() {
-    const categories = getCourseCategories();
-    const courses = getCourses();
+  async onLoad() {
+    await this.loadCourses();
+  },
 
-    this.setData({
-      categories,
-      courses
+  async loadCourses() {
+    wx.showLoading({
+      title: '加载中'
     });
-    this.filterCourses('全部');
+
+    try {
+      const courses = await listCourses();
+      const categories = ['全部', ...Array.from(new Set(courses.map((item) => item.category).filter(Boolean)))];
+      this.setData({
+        categories,
+        courses
+      });
+      this.filterCourses('全部');
+    } catch (error) {
+      wx.showToast({
+        title: error.message || '课程加载失败',
+        icon: 'none'
+      });
+    } finally {
+      wx.hideLoading();
+    }
   },
 
   handleCategoryTap(event) {

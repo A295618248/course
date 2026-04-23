@@ -1,8 +1,9 @@
-const { getCourses, getActivities, getSiteStats } = require('../../utils/data');
+const { getPortalHome } = require('../../utils/services/public-service');
 
 Page({
   data: {
     brandName: '星河艺术中心',
+    loading: true,
     stats: {
       courseCount: 0,
       activityCount: 0,
@@ -30,13 +31,27 @@ Page({
   },
 
   onLoad() {
-    const courses = getCourses();
-    const activities = getActivities();
-    this.setData({
-      stats: getSiteStats(),
-      featuredCourses: courses.slice(0, 3),
-      upcomingActivities: activities.slice(0, 2)
-    });
+    this.loadPortalHome();
+  },
+
+  async loadPortalHome() {
+    this.setData({ loading: true });
+    try {
+      const data = await getPortalHome();
+      this.setData({
+        brandName: data.site.brandName || '星河艺术中心',
+        stats: data.stats,
+        featuredCourses: data.featuredCourses || [],
+        upcomingActivities: data.upcomingActivities || []
+      });
+    } catch (error) {
+      wx.showToast({
+        title: error.message || '首页加载失败',
+        icon: 'none'
+      });
+    } finally {
+      this.setData({ loading: false });
+    }
   },
 
   goToCourses() {

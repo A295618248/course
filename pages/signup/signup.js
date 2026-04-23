@@ -1,11 +1,14 @@
-const { getCourseById, getActivityById } = require('../../utils/data');
-const { saveSignup } = require('../../utils/signup-store');
+const {
+  fetchCourseDetail,
+  fetchActivityDetail,
+  submitSignupForm
+} = require('../../utils/services/public-service');
 
-function buildTarget(options) {
+async function buildTarget(options) {
   const { type, id } = options || {};
 
   if (type === 'course' && id) {
-    const course = getCourseById(id);
+    const course = await fetchCourseDetail(id);
     if (!course) {
       return null;
     }
@@ -19,7 +22,7 @@ function buildTarget(options) {
   }
 
   if (type === 'activity' && id) {
-    const activity = getActivityById(id);
+    const activity = await fetchActivityDetail(id);
     if (!activity) {
       return null;
     }
@@ -43,6 +46,8 @@ function buildTarget(options) {
 Page({
   data: {
     target: null,
+    loading: true,
+    submitting: false,
     visitOptions: ['请选择意向时间', '工作日放学后', '周六上午', '周六下午', '周日上午', '周日下午'],
     visitIndex: 0,
     form: {
@@ -55,18 +60,30 @@ Page({
     }
   },
 
-  onLoad(options) {
-    const target = buildTarget(options);
+  async onLoad(options) {
+    try {
+      const target = await buildTarget(options);
 
-    if (!target) {
+      if (!target) {
+        wx.showToast({
+          title: '目标内容不存在',
+          icon: 'none'
+        });
+        this.setData({ loading: false });
+        return;
+      }
+
+      this.setData({
+        target,
+        loading: false
+      });
+    } catch (error) {
       wx.showToast({
-        title: '目标内容不存在',
+        title: error.message || '页面加载失败',
         icon: 'none'
       });
-      return;
+      this.setData({ loading: false });
     }
-
-    this.setData({ target });
   },
 
   handleInput(event) {
@@ -113,7 +130,7 @@ Page({
     return '';
   },
 
-  submitSignup() {
+  async submitSignup() {
     const error = this.validate();
     if (error) {
       wx.showToast({
@@ -123,40 +140,56 @@ Page({
       return;
     }
 
-    const { form, target, visitOptions, visitIndex } = this.data;
-    const record = saveSignup({
-      businessType: target.businessType,
-      targetTitle: target.title,
-      targetSubtitle: target.subtitle,
-      parentName: form.parentName.trim(),
-      phone: form.phone.trim(),
-      studentName: form.studentName.trim(),
-      age: Number(form.studentAge),
-      interest: form.interest.trim(),
-      preferredTime: visitOptions[visitIndex],
-      remark: form.remark.trim()
-    });
+    if (this.data.submitting) {
+      return;
+    }
 
-    wx.showModal({
-      title: '提交成功',
-      content: `已收到 ${record.studentName} 的报名信息，我们会尽快联系您。`,
-      showCancel: false,
-      success: () => {
-        this.setData({
-          visitIndex: 0,
-          form: {
-            parentName: '',
-            phone: '',
-            studentName: '',
-            studentAge: '',
-            interest: '',
-            remark: ''
-          }
-        });
-        wx.switchTab({
-          url: '/pages/profile/profile'
-        });
-      }
-    });
+    const { form, target, visitOptions, visitIndex } = this.data;
+    this.setData({ submitting: true });
+
+    try {
+      const record = await submitSignupForm({
+        businessType: target.businessType,
+        targetId: target.targetId || '',
+        targetTitle: target.title,
+        targetSubtitle: target.subtitle,
+        parentName: form.parentName.trim(),
+        phone: form.phone.trim(),
+        studentName: form.studentName.trim(),
+        age: Number(form.studentAge),
+        interest: form.interest.trim(),
+        preferredTime: visitOptions[visitIndex],
+        remark: form.remark.trim()
+      });
+
+      wx.showModal({
+        title: '提交成功',
+        content: `已收到 ${record.studentName} 的报名信息，我们会尽快联系您。`,
+        showCancel: false,
+        success: () => {
+          this.setData({
+            submitting: false,
+            visitIndex: 0,
+            form: {
+              parentName: '',
+              phone: '',
+              studentName: '',
+              studentAge: '',
+              interest: '',
+              remark: ''
+            }
+          });
+          wx.switchTab({
+            url: '/pages/profile/profile'
+          });
+        }
+      });
+    } catch (submitError) {
+      this.setData({ submitting: false });
+      wx.showToast({
+        title: submitError.message || '提交失败',
+        icon: 'none'
+      });
+    }
   }
 });

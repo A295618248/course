@@ -1,0 +1,40 @@
+<view class="page">
+  <view class="card admin-hero">
+    <view class="admin-title">报名线索</view>
+    <view class="admin-subtitle">统一查看课程咨询、活动报名与通用咨询信息。</view>
+  </view>
+
+  <scroll-view class="filter-row" scroll-x show-scrollbar="{{false}}">
+    <view
+      wx:for="{{tabs}}"
+      wx:key="*this"
+      class="filter-chip {{activeTab === item ? 'filter-chip--active' : ''}}"
+      data-tab="{{item}}"
+      bindtap="switchTab"
+    >
+      {{item}}
+    </view>
+  </scroll-view>
+
+  <view wx:if="{{signups.length}}" class="record-list">
+    <view class="card record-card" wx:for="{{signups}}" wx:key="_id">
+      <view class="record-top">
+        <view>
+          <view class="record-name">{{item.studentName}} / {{item.parentName}}</view>
+          <view class="record-meta">{{item.phone}} · {{item.age}}岁 · {{item.preferredTime}}</view>
+        </view>
+        <view class="tag {{item.businessType === 'activity' ? 'tag-warm' : item.businessType === 'general' ? 'tag-success' : ''}}">
+          {{item.businessType === 'course' ? '课程' : item.businessType === 'activity' ? '活动' : '咨询'}}
+        </view>
+      </view>
+      <view class="record-target">{{item.targetTitle || '通用咨询'}}</view>
+      <view class="record-meta">{{item.targetSubtitle}}</view>
+      <view class="record-remark" wx:if="{{item.remark}}">备注：{{item.remark}}</view>
+      <view class="record-footer">提交时间：{{item.createdAtText || item.createdAt}}</view>
+    </view>
+  </view>
+
+  <view wx:else class="card empty-card">
+    当前筛选条件下暂无报名线索。
+  </view>
+</view>

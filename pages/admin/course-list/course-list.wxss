@@ -1,0 +1,84 @@
+.top-banner {
+  padding: 32rpx;
+}
+
+.banner-title {
+  font-size: 38rpx;
+  font-weight: 700;
+  color: #111827;
+}
+
+.banner-desc {
+  margin-top: 12rpx;
+  font-size: 24rpx;
+  color: #6b7280;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 24rpx 0;
+}
+
+.toolbar-title {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #111827;
+}
+
+.course-item {
+  padding: 28rpx;
+  margin-bottom: 18rpx;
+}
+
+.course-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 18rpx;
+}
+
+.course-title {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #111827;
+}
+
+.course-meta {
+  margin-top: 10rpx;
+  font-size: 24rpx;
+  color: #6b7280;
+}
+
+.course-summary {
+  margin-top: 16rpx;
+  font-size: 25rpx;
+  line-height: 1.7;
+  color: #4b5563;
+}
+
+.course-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20rpx;
+  margin-top: 20rpx;
+}
+
+.action-row {
+  display: flex;
+  gap: 16rpx;
+}
+
+.mini-btn {
+  min-width: 128rpx;
+  height: 64rpx;
+  line-height: 64rpx;
+  border-radius: 16rpx;
+  font-size: 24rpx;
+  padding: 0 18rpx;
+}
+
+.mini-btn::after {
+  border: none;
+}

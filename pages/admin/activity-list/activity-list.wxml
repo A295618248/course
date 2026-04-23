@@ -1,0 +1,36 @@
+<view class="page admin-page">
+  <view class="card admin-hero">
+    <view>
+      <view class="admin-title">活动管理</view>
+      <view class="admin-subtitle">维护活动发布状态、日期地点和报名名额。</view>
+    </view>
+    <button class="button-primary admin-small-button" bindtap="createActivity">新建活动</button>
+  </view>
+
+  <view wx:if="{{!hasAccess}}" class="card empty-state section">
+    当前账号不是管理员，请先完成管理员绑定。
+  </view>
+
+  <view wx:if="{{hasAccess}}">
+    <view class="admin-card" wx:for="{{activities}}" wx:key="id">
+      <view class="admin-list-top">
+        <view>
+          <view class="admin-item-title">{{item.title}}</view>
+          <view class="admin-item-meta">{{item.type}} · {{item.date}} {{item.time}} · {{item.location}}</view>
+        </view>
+        <view class="tag {{item.published ? 'tag-success' : 'tag-warm'}}">{{item.published ? '已发布' : '草稿'}}</view>
+      </view>
+      <view class="admin-item-desc">{{item.summary}}</view>
+      <view class="admin-list-bottom">
+        <view class="admin-price">已报 {{item.enrolled || 0}} / {{item.capacity || 0}}</view>
+        <view class="admin-actions">
+          <button class="button-secondary admin-mini-button" size="mini" data-id="{{item.id}}" bindtap="editActivity">编辑</button>
+        </view>
+      </view>
+    </view>
+
+    <view wx:if="{{!activities.length && !loading}}" class="card empty-state section">
+      暂无活动，请先创建活动内容。
+    </view>
+  </view>
+</view>

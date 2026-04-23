@@ -1,0 +1,59 @@
+.toolbar-card,
+.list-card {
+  padding: 30rpx;
+}
+
+.filter-row {
+  display: flex;
+  gap: 16rpx;
+  margin-top: 18rpx;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.filter-chip {
+  padding: 12rpx 24rpx;
+  border-radius: 999rpx;
+  background: #eef2ff;
+  color: #4f46e5;
+  font-size: 24rpx;
+}
+
+.filter-chip--active {
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: #ffffff;
+}
+
+.signup-item + .signup-item {
+  margin-top: 22rpx;
+  padding-top: 22rpx;
+  border-top: 2rpx solid #f3f4f6;
+}
+
+.signup-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 16rpx;
+}
+
+.signup-name {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #111827;
+}
+
+.signup-meta,
+.signup-time,
+.signup-remark {
+  margin-top: 10rpx;
+  font-size: 24rpx;
+  line-height: 1.7;
+  color: #6b7280;
+}
+
+.signup-target {
+  margin-top: 14rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #1f2937;
+}

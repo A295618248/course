@@ -1,28 +1,38 @@
-const { getActivityById } = require('../../utils/data');
+const { fetchActivityDetail } = require('../../utils/services/public-service');
 
 Page({
   data: {
-    activity: null
+    activity: null,
+    loading: true
   },
 
-  onLoad(options) {
-    const activity = getActivityById(options.id);
-
-    if (!activity) {
+  async onLoad(options) {
+    if (!options.id) {
       wx.showToast({
         title: '活动不存在',
         icon: 'none'
       });
+      this.setData({ loading: false });
       return;
     }
 
-    wx.setNavigationBarTitle({
-      title: activity.title
-    });
+    try {
+      const activity = await fetchActivityDetail(options.id);
+      wx.setNavigationBarTitle({
+        title: activity.title
+      });
 
-    this.setData({
-      activity
-    });
+      this.setData({
+        activity,
+        loading: false
+      });
+    } catch (error) {
+      wx.showToast({
+        title: error.message || '活动加载失败',
+        icon: 'none'
+      });
+      this.setData({ loading: false });
+    }
   },
 
   handleSignup() {

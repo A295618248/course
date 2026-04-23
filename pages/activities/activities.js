@@ -1,4 +1,4 @@
-const { getActivities } = require('../../utils/data');
+const { listActivities } = require('../../utils/services/public-service');
 
 Page({
   data: {
@@ -8,17 +8,35 @@ Page({
     filteredActivities: []
   },
 
-  onLoad() {
-    const activities = getActivities();
-    this.setData({
-      activities
+  async onLoad() {
+    await this.loadActivities('全部');
+  },
+
+  async loadActivities(status) {
+    wx.showLoading({
+      title: '加载中'
     });
-    this.applyFilter('全部');
+
+    try {
+      const activities = await listActivities(status);
+      this.setData({
+        activities,
+        filteredActivities: activities,
+        activeTab: status
+      });
+    } catch (error) {
+      wx.showToast({
+        title: error.message || '活动加载失败',
+        icon: 'none'
+      });
+    } finally {
+      wx.hideLoading();
+    }
   },
 
   switchTab(event) {
     const { tab } = event.currentTarget.dataset;
-    this.applyFilter(tab);
+    this.loadActivities(tab);
   },
 
   applyFilter(tab) {

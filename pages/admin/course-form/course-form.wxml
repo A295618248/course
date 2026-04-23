@@ -1,0 +1,85 @@
+<view class="page">
+  <view class="card admin-hero">
+    <view class="admin-title">{{pageTitle}}</view>
+    <view class="admin-subtitle">维护课程信息、展示图片、授课安排和招生文案。</view>
+  </view>
+
+  <view class="card admin-form section">
+    <view class="field">
+      <text class="field-label">课程标题</text>
+      <input class="input" value="{{form.title}}" data-field="title" bindinput="handleInput" placeholder="例如：少儿创意美术精品班" />
+    </view>
+
+    <view class="field">
+      <text class="field-label">课程分类</text>
+      <input class="input" value="{{form.category}}" data-field="category" bindinput="handleInput" placeholder="例如：创意绘画" />
+    </view>
+
+    <view class="field-row">
+      <view class="field field-half">
+        <text class="field-label">适龄范围</text>
+        <input class="input" value="{{form.ageRange}}" data-field="ageRange" bindinput="handleInput" placeholder="6-10岁" />
+      </view>
+      <view class="field field-half">
+        <text class="field-label">课时</text>
+        <input class="input" value="{{form.duration}}" data-field="duration" bindinput="handleInput" placeholder="12课时 / 6周" />
+      </view>
+    </view>
+
+    <view class="field-row">
+      <view class="field field-half">
+        <text class="field-label">价格</text>
+        <input class="input" type="digit" value="{{form.priceValue}}" data-field="priceValue" bindinput="handleInput" placeholder="1680" />
+      </view>
+      <view class="field field-half">
+        <text class="field-label">班型规模</text>
+        <input class="input" value="{{form.classSize}}" data-field="classSize" bindinput="handleInput" placeholder="1对8小班" />
+      </view>
+    </view>
+
+    <view class="field">
+      <text class="field-label">上课时间</text>
+      <input class="input" value="{{form.schedule}}" data-field="schedule" bindinput="handleInput" placeholder="周三 18:30-20:00 / 周六 10:00-11:30" />
+    </view>
+
+    <view class="field">
+      <text class="field-label">课程摘要</text>
+      <textarea class="textarea" value="{{form.summary}}" data-field="summary" bindinput="handleInput" placeholder="用于列表页的短介绍" />
+    </view>
+
+    <view class="field">
+      <text class="field-label">课程详情</text>
+      <textarea class="textarea textarea-large" value="{{form.description}}" data-field="description" bindinput="handleInput" placeholder="详细描述课程内容与教学价值" />
+    </view>
+
+    <view class="field">
+      <text class="field-label">课程亮点（每行一条）</text>
+      <textarea class="textarea" value="{{highlightsText}}" bindinput="handleHighlightsInput" placeholder="例如：\n支持试听\n阶段成长报告" />
+    </view>
+
+    <view class="field">
+      <text class="field-label">教学安排（每行一条）</text>
+      <textarea class="textarea" value="{{outlineText}}" bindinput="handleOutlineInput" placeholder="例如：\n第一阶段：基础线条训练\n第二阶段：主题创作" />
+    </view>
+
+    <view class="field">
+      <text class="field-label">标签（用中文逗号分隔）</text>
+      <input class="input" value="{{tagsText}}" bindinput="handleTagsInput" placeholder="零基础友好，小班教学，支持试听" />
+    </view>
+
+    <view class="field">
+      <text class="field-label">封面图片</text>
+      <view class="upload-panel">
+        <image wx:if="{{form.coverImage}}" class="cover-preview" src="{{form.coverImage}}" mode="aspectFill"></image>
+        <button class="button-secondary" bindtap="chooseImage">上传图片</button>
+      </view>
+    </view>
+
+    <view class="field">
+      <text class="field-label">发布状态</text>
+      <switch checked="{{form.published}}" color="#4f46e5" bindchange="handlePublishedChange" />
+    </view>
+
+    <button class="button-primary" bindtap="submitForm" loading="{{submitting}}">保存课程</button>
+  </view>
+</view>

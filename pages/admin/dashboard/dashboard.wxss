@@ -1,0 +1,68 @@
+.panel-hero {
+  padding: 32rpx;
+  background: linear-gradient(135deg, #0f172a, #334155);
+  color: #ffffff;
+}
+
+.panel-title {
+  font-size: 42rpx;
+  font-weight: 700;
+}
+
+.panel-subtitle {
+  margin-top: 12rpx;
+  font-size: 24rpx;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.admin-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18rpx;
+}
+
+.admin-card {
+  padding: 28rpx;
+}
+
+.admin-card__label {
+  font-size: 24rpx;
+  color: #64748b;
+}
+
+.admin-card__value {
+  margin-top: 14rpx;
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.menu-grid {
+  display: grid;
+  gap: 18rpx;
+}
+
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 28rpx;
+}
+
+.menu-item__title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #111827;
+}
+
+.menu-item__desc {
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  color: #6b7280;
+}
+
+.menu-item__action {
+  color: #4f46e5;
+  font-size: 24rpx;
+}

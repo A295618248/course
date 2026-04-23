@@ -1,0 +1,46 @@
+<view class="page">
+  <view class="card admin-hero">
+    <view class="admin-title">站点设置</view>
+    <view class="admin-subtitle">维护机构名称、首页主文案、联系方式和展示图片。</view>
+  </view>
+
+  <view class="card admin-form section">
+    <view class="field">
+      <text class="field-label">机构名称</text>
+      <input class="input" value="{{form.brandName}}" data-field="brandName" bindinput="handleInput" placeholder="例如：星河艺术中心" />
+    </view>
+
+    <view class="field">
+      <text class="field-label">首页主标题</text>
+      <input class="input" value="{{form.heroTitle}}" data-field="heroTitle" bindinput="handleInput" placeholder="例如：让每个孩子找到自己的艺术表达" />
+    </view>
+
+    <view class="field">
+      <text class="field-label">首页副标题</text>
+      <textarea class="textarea" value="{{form.heroSubtitle}}" data-field="heroSubtitle" bindinput="handleInput" placeholder="用于首页首屏介绍" />
+    </view>
+
+    <view class="field-row">
+      <view class="field field-half">
+        <text class="field-label">联系电话</text>
+        <input class="input" value="{{form.contactPhone}}" data-field="contactPhone" bindinput="handleInput" placeholder="400-800-5200" />
+      </view>
+      <view class="field field-half">
+        <text class="field-label">机构地址</text>
+        <input class="input" value="{{form.address}}" data-field="address" bindinput="handleInput" placeholder="广州市天河区艺术路 88 号" />
+      </view>
+    </view>
+
+    <view class="field">
+      <text class="field-label">机构介绍</text>
+      <textarea class="textarea textarea-large" value="{{form.intro}}" data-field="intro" bindinput="handleInput" placeholder="用于首页与机构介绍文案" />
+    </view>
+
+    <view class="field">
+      <text class="field-label">服务说明</text>
+      <textarea class="textarea" value="{{form.serviceNotice}}" data-field="serviceNotice" bindinput="handleInput" placeholder="例如：报名提交后工作时间 15 分钟内联系" />
+    </view>
+
+    <button class="button-primary" bindtap="submit" loading="{{saving}}">保存设置</button>
+  </view>
+</view>

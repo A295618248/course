@@ -1,11 +1,26 @@
+const { CLOUD_ENV_ID, BRAND_NAME } = require('./utils/config');
+
 App({
   globalData: {
-    brandName: '星河艺术中心'
+    brandName: BRAND_NAME,
+    cloudReady: false
   },
 
   onLaunch() {
-    const logs = wx.getStorageSync('launchLogs') || [];
-    logs.unshift(Date.now());
-    wx.setStorageSync('launchLogs', logs.slice(0, 20));
+    if (!wx.cloud) {
+      wx.showModal({
+        title: '基础库过低',
+        content: '请升级微信版本后再使用本小程序。',
+        showCancel: false
+      });
+      return;
+    }
+
+    wx.cloud.init({
+      env: CLOUD_ENV_ID,
+      traceUser: true
+    });
+
+    this.globalData.cloudReady = true;
   }
 });

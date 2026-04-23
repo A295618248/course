@@ -50,7 +50,7 @@
   <view class="card tips-card section">
     <view class="section-title">报名说明</view>
     <view class="muted">1. 提交后，课程顾问会在工作时间尽快电话联系。</view>
-    <view class="muted">2. 报名数据保存在本地演示存储，可在“报名中心”页查看记录。</view>
+    <view class="muted">2. 报名数据会写入微信云开发数据库，可在“报名中心”页查看记录。</view>
     <view class="muted">3. 课程和活动都支持从详情页直接进入本表单。</view>
   </view>
 

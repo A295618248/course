@@ -1,0 +1,78 @@
+<view class="page admin-page">
+  <view class="admin-header card">
+    <view>
+      <view class="admin-title">运营管理台</view>
+      <view class="admin-subtitle">课程、活动、报名线索和站点内容统一管理</view>
+    </view>
+    <button class="button-secondary admin-button" bindtap="refreshAll">刷新数据</button>
+  </view>
+
+  <view class="stats-grid">
+    <view class="card stat-card">
+      <view class="stat-number">{{summary.courseCount}}</view>
+      <view class="stat-label">课程总数</view>
+    </view>
+    <view class="card stat-card">
+      <view class="stat-number">{{summary.activityCount}}</view>
+      <view class="stat-label">活动总数</view>
+    </view>
+    <view class="card stat-card">
+      <view class="stat-number">{{summary.signupCount}}</view>
+      <view class="stat-label">总报名数</view>
+    </view>
+    <view class="card stat-card">
+      <view class="stat-number">{{summary.publishedCourseCount}}</view>
+      <view class="stat-label">已发布课程</view>
+    </view>
+  </view>
+
+  <view class="card admin-section">
+    <view class="section-header">
+      <view>
+        <view class="section-title">快捷入口</view>
+        <view class="section-subtitle">从这里进入具体业务模块</view>
+      </view>
+    </view>
+    <view class="quick-grid">
+      <navigator class="quick-card" url="/pages/admin/course-list/course-list">
+        <view class="quick-title">课程管理</view>
+        <view class="quick-desc">新增、编辑、发布课程</view>
+      </navigator>
+      <navigator class="quick-card" url="/pages/admin/activity-list/activity-list">
+        <view class="quick-title">活动管理</view>
+        <view class="quick-desc">维护活动、名额和状态</view>
+      </navigator>
+      <navigator class="quick-card" url="/pages/admin/signups/signups">
+        <view class="quick-title">报名线索</view>
+        <view class="quick-desc">查看用户报名与咨询信息</view>
+      </navigator>
+      <navigator class="quick-card" url="/pages/admin/site-settings/site-settings">
+        <view class="quick-title">站点设置</view>
+        <view class="quick-desc">维护首页文案与机构信息</view>
+      </navigator>
+    </view>
+  </view>
+
+  <view class="card admin-section">
+    <view class="section-header">
+      <view>
+        <view class="section-title">最近报名</view>
+        <view class="section-subtitle">最新客户线索，便于跟进</view>
+      </view>
+      <navigator class="link-text" url="/pages/admin/signups/signups">查看全部</navigator>
+    </view>
+
+    <view wx:if="{{latestSignups.length}}">
+      <view class="list-row" wx:for="{{latestSignups}}" wx:key="_id">
+        <view>
+          <view class="list-title">{{item.studentName}} / {{item.parentName}}</view>
+          <view class="list-meta">{{item.phone}} · {{item.targetTitle}} · {{item.preferredTime}}</view>
+        </view>
+        <view class="tag {{item.businessType === 'activity' ? 'tag-warm' : ''}}">
+          {{item.businessType === 'course' ? '课程' : item.businessType === 'activity' ? '活动' : '咨询'}}
+        </view>
+      </view>
+    </view>
+    <view wx:else class="empty-state">暂时没有报名数据</view>
+  </view>
+</view>

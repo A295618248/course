@@ -1,0 +1,33 @@
+<view class="page admin-page">
+  <view class="card admin-hero">
+    <view>
+      <view class="admin-title">课程管理</view>
+      <view class="admin-subtitle">发布新课程、编辑详情、控制上下架状态。</view>
+    </view>
+    <button class="button-primary admin-small-button" bindtap="goCreate">新建课程</button>
+  </view>
+
+  <view class="admin-card" wx:for="{{courses}}" wx:key="id">
+    <view class="admin-list-top">
+      <view>
+        <view class="admin-item-title">{{item.title}}</view>
+        <view class="admin-item-meta">{{item.category}} · {{item.ageRange}} · {{item.schedule}}</view>
+      </view>
+      <view class="tag {{item.published ? 'tag-success' : 'tag-warm'}}">{{item.published ? '已发布' : '草稿'}}</view>
+    </view>
+    <view class="admin-item-desc">{{item.summary}}</view>
+    <view class="admin-list-bottom">
+      <view class="admin-price">{{item.priceText}}</view>
+      <view class="admin-actions">
+        <button class="button-secondary admin-mini-button" size="mini" data-id="{{item.id}}" bindtap="goEdit">编辑</button>
+        <button class="button-primary admin-mini-button" size="mini" data-id="{{item.id}}" bindtap="togglePublish">
+          {{item.published ? '下架' : '发布'}}
+        </button>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{!courses.length && !loading}}" class="card empty-state">
+    暂无课程，请先创建课程内容。
+  </view>
+</view>
