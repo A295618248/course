@@ -1,0 +1,59 @@
+<view class="page">
+  <view wx:if="{{course}}" class="card hero-card">
+    <view class="tag">{{course.category}}</view>
+    <view class="course-title">{{course.title}}</view>
+    <view class="course-desc">{{course.summary}}</view>
+  </view>
+
+  <view wx:if="{{course}}" class="meta-grid">
+    <view class="card meta-item">
+      <text class="meta-label">适龄学员</text>
+      <text class="meta-value">{{course.ageRange}}</text>
+    </view>
+    <view class="card meta-item">
+      <text class="meta-label">课时安排</text>
+      <text class="meta-value">{{course.duration}}</text>
+    </view>
+    <view class="card meta-item">
+      <text class="meta-label">上课时间</text>
+      <text class="meta-value">{{course.schedule}}</text>
+    </view>
+    <view class="card meta-item">
+      <text class="meta-label">班型规模</text>
+      <text class="meta-value">{{course.classSize}}</text>
+    </view>
+  </view>
+
+  <view wx:if="{{course}}" class="card section">
+    <view class="section-title">课程介绍</view>
+    <view class="course-desc">{{course.description}}</view>
+  </view>
+
+  <view wx:if="{{course}}" class="card section">
+    <view class="section-title">课程亮点</view>
+    <view class="detail-list">
+      <view class="detail-row" wx:for="{{course.highlights}}" wx:key="*this">
+        <view class="detail-dot"></view>
+        <view>{{item}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{course}}" class="card section">
+    <view class="section-title">教学安排</view>
+    <view class="detail-list">
+      <view class="detail-row" wx:for="{{course.outline}}" wx:key="*this">
+        <view class="detail-dot"></view>
+        <view>{{item}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{course}}" class="card cta-card">
+    <view>
+      <view class="cta-title">{{course.priceText}}</view>
+      <view class="cta-desc">支持预约试听、课程咨询与正式报名</view>
+    </view>
+    <button class="button-primary cta-button" bindtap="goSignup">立即报名</button>
+  </view>
+</view>

@@ -1,0 +1,105 @@
+.hero {
+  padding: 32rpx;
+  background: linear-gradient(135deg, #1f3b8f, #435ad0);
+  color: #ffffff;
+}
+
+.hero__title {
+  font-size: 38rpx;
+  font-weight: 700;
+}
+
+.hero__desc {
+  margin-top: 12rpx;
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.86);
+  line-height: 1.7;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18rpx;
+  margin-top: 24rpx;
+}
+
+.stat-card {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 18rpx;
+  padding: 20rpx;
+}
+
+.stat-card__value {
+  font-size: 38rpx;
+  font-weight: 700;
+}
+
+.stat-card__label {
+  margin-top: 8rpx;
+  font-size: 22rpx;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.record-list {
+  display: grid;
+  gap: 18rpx;
+}
+
+.record-card {
+  padding: 28rpx;
+}
+
+.record-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 20rpx;
+}
+
+.record-name {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #111827;
+}
+
+.record-meta,
+.record-footer {
+  margin-top: 10rpx;
+  font-size: 24rpx;
+  color: #6b7280;
+}
+
+.record-target {
+  margin-top: 16rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.record-remark {
+  margin-top: 10rpx;
+  font-size: 24rpx;
+  line-height: 1.7;
+  color: #4b5563;
+}
+
+.empty-card {
+  padding: 56rpx 32rpx;
+  text-align: center;
+}
+
+.empty-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #111827;
+}
+
+.empty-desc {
+  margin-top: 12rpx;
+  font-size: 24rpx;
+  line-height: 1.7;
+  color: #6b7280;
+}
+
+.empty-button {
+  margin-top: 24rpx;
+}

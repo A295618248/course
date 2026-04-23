@@ -1,0 +1,101 @@
+.hero {
+  padding: 34rpx;
+  background: linear-gradient(135deg, #1f2937, #374151);
+  color: #ffffff;
+}
+
+.hero-title {
+  font-size: 40rpx;
+  font-weight: 700;
+}
+
+.hero-desc {
+  margin-top: 14rpx;
+  font-size: 26rpx;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.filter-row {
+  display: flex;
+  gap: 14rpx;
+  margin: 24rpx 0 8rpx;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.filter-chip {
+  flex-shrink: 0;
+  padding: 12rpx 24rpx;
+  border-radius: 999rpx;
+  background: #eef2f7;
+  color: #4b5563;
+  font-size: 24rpx;
+}
+
+.filter-chip.active {
+  background: #111827;
+  color: #ffffff;
+}
+
+.activity-card {
+  padding: 28rpx;
+  margin-bottom: 18rpx;
+}
+
+.activity-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 18rpx;
+}
+
+.activity-title {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #111827;
+}
+
+.activity-meta {
+  margin-top: 10rpx;
+  font-size: 24rpx;
+  color: #6b7280;
+  line-height: 1.7;
+}
+
+.activity-summary {
+  margin-top: 18rpx;
+  font-size: 26rpx;
+  color: #374151;
+  line-height: 1.8;
+}
+
+.activity-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 22rpx;
+}
+
+.activity-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10rpx;
+}
+
+.footer-actions {
+  display: flex;
+  gap: 14rpx;
+}
+
+.mini-action {
+  min-width: 132rpx;
+  height: 64rpx;
+  padding: 0 20rpx;
+  border-radius: 16rpx;
+  font-size: 24rpx;
+}
+
+.mini-action::after {
+  border: none;
+}

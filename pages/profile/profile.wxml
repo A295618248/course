@@ -1,0 +1,54 @@
+<view class="page">
+  <view class="card hero">
+    <view class="hero__title">报名中心</view>
+    <view class="hero__desc">查看课程咨询、活动报名和顾问跟进记录。</view>
+    <view class="stats-grid">
+      <view class="stat-card">
+        <view class="stat-card__value">{{stats.total}}</view>
+        <view class="stat-card__label">总报名</view>
+      </view>
+      <view class="stat-card">
+        <view class="stat-card__value">{{stats.course}}</view>
+        <view class="stat-card__label">课程咨询</view>
+      </view>
+      <view class="stat-card">
+        <view class="stat-card__value">{{stats.activity}}</view>
+        <view class="stat-card__label">活动报名</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-header">
+      <view>
+        <view class="section-title">报名记录</view>
+        <view class="section-subtitle">最近提交的信息会保存在本地设备中</view>
+      </view>
+      <view wx:if="{{records.length}}" class="link-text" bindtap="clearRecords">清空</view>
+    </view>
+
+    <view wx:if="{{records.length}}" class="record-list">
+      <view class="card record-card" wx:for="{{records}}" wx:key="id">
+        <view class="record-top">
+          <view>
+            <view class="record-name">{{item.studentName}} / {{item.parentName}}</view>
+            <view class="record-meta">{{item.phone}} · {{item.age}}岁 · {{item.preferredTime}}</view>
+          </view>
+          <view class="tag {{item.businessType === 'activity' ? 'tag-warm' : item.businessType === 'general' ? 'tag-success' : ''}}">
+            {{item.businessType === 'course' ? '课程' : item.businessType === 'activity' ? '活动' : '咨询'}}
+          </view>
+        </view>
+        <view class="record-target">{{item.targetTitle}}</view>
+        <view class="record-meta">{{item.targetSubtitle}}</view>
+        <view class="record-remark" wx:if="{{item.remark}}">备注：{{item.remark}}</view>
+        <view class="record-footer">提交时间：{{item.createdAtText}}</view>
+      </view>
+    </view>
+
+    <view wx:else class="card empty-card">
+      <view class="empty-title">还没有报名记录</view>
+      <view class="empty-desc">课程咨询或活动报名提交后会自动展示在这里。</view>
+      <navigator class="button-primary empty-button" url="/pages/signup/signup?source=general">立即填写一条报名</navigator>
+    </view>
+  </view>
+</view>

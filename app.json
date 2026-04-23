@@ -1,0 +1,44 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/courses/courses",
+    "pages/activities/activities",
+    "pages/profile/profile",
+    "pages/course-detail/course-detail",
+    "pages/activity-detail/activity-detail",
+    "pages/signup/signup"
+  ],
+  "window": {
+    "navigationBarTitleText": "星河艺术中心",
+    "navigationBarBackgroundColor": "#fff7f1",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#f7f7fb",
+    "backgroundTextStyle": "light"
+  },
+  "tabBar": {
+    "color": "#7a6d66",
+    "selectedColor": "#d66a3c",
+    "backgroundColor": "#fffaf7",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/courses/courses",
+        "text": "课程"
+      },
+      {
+        "pagePath": "pages/activities/activities",
+        "text": "活动"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "报名"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

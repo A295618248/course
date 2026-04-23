@@ -1,0 +1,104 @@
+<view class="page">
+  <view class="card hero">
+    <view class="hero-tag">艺术启蒙 · 成长陪伴 · 展示提升</view>
+    <view class="hero-title">{{brandName}}</view>
+    <view class="hero-desc">
+      面向 4-16 岁少儿与青少年，提供美术、书法、创意手工等课程，并通过活动、展览与试听机制帮助机构持续招生。
+    </view>
+    <view class="hero-actions">
+      <button class="button-primary" bindtap="goToCourses">查看课程</button>
+      <button class="button-secondary" bindtap="goToActivities">近期活动</button>
+    </view>
+  </view>
+
+  <view class="stats-grid">
+    <view class="card stat-card">
+      <text class="stat-value">{{stats.courseCount}}</text>
+      <text class="stat-label">在售课程</text>
+    </view>
+    <view class="card stat-card">
+      <text class="stat-value">{{stats.activityCount}}</text>
+      <text class="stat-label">近期活动</text>
+    </view>
+    <view class="card stat-card">
+      <text class="stat-value">{{stats.signupCount}}</text>
+      <text class="stat-label">累计咨询</text>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-header">
+      <view>
+        <view class="section-title">机构亮点</view>
+        <view class="section-subtitle">适合培训机构对外展示和获客转化</view>
+      </view>
+    </view>
+    <view class="feature-list">
+      <view class="feature-item" wx:for="{{services}}" wx:key="title">
+        <view class="feature-index">{{item.icon}}</view>
+        <view>
+          <view class="feature-title">{{item.title}}</view>
+          <view class="feature-desc">{{item.desc}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-header">
+      <view>
+        <view class="section-title">推荐课程</view>
+        <view class="section-subtitle">家长可快速查看班型和适龄信息</view>
+      </view>
+      <view class="link-text" bindtap="goToCourses">全部课程</view>
+    </view>
+    <view class="card-list">
+      <view class="card course-card" wx:for="{{featuredCourses}}" wx:key="id" data-id="{{item.id}}" bindtap="openCourse">
+        <view class="card-top">
+          <view>
+            <view class="card-title">{{item.title}}</view>
+            <view class="card-meta">{{item.category}} · {{item.ageRange}}</view>
+          </view>
+          <view class="tag">{{item.classSize}}</view>
+        </view>
+        <view class="card-desc">{{item.summary}}</view>
+        <view class="card-footer">
+          <view class="price-text">{{item.priceText}}</view>
+          <view class="link-text">查看详情</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-header">
+      <view>
+        <view class="section-title">近期活动</view>
+        <view class="section-subtitle">体验课、展览、开放日都可以在这里管理</view>
+      </view>
+      <view class="link-text" bindtap="goToActivities">更多活动</view>
+    </view>
+    <view class="card-list">
+      <view class="card activity-card" wx:for="{{upcomingActivities}}" wx:key="id" data-id="{{item.id}}" bindtap="openActivity">
+        <view class="card-top">
+          <view>
+            <view class="card-title">{{item.title}}</view>
+            <view class="card-meta">{{item.date}} {{item.time}} · {{item.location}}</view>
+          </view>
+          <view class="tag {{item.status === '余位不多' ? 'tag-warm' : 'tag-success'}}">{{item.status}}</view>
+        </view>
+        <view class="card-desc">{{item.summary}}</view>
+        <view class="card-footer">
+          <view class="remaining-text">剩余 {{item.remaining}} 个名额</view>
+          <view class="link-text">活动详情</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="card cta-card">
+    <view class="section-title">想先沟通孩子适合什么课程？</view>
+    <view class="cta-desc">支持试听预约、课程咨询、活动报名和一对一顾问回访。</view>
+    <button class="button-primary" bindtap="quickSignup">立即填写报名表</button>
+  </view>
+</view>
