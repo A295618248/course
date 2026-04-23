@@ -1,50 +1,106 @@
 const cloud = require('wx-server-sdk');
-const { COLLECTIONS, success, fail, requireAdmin } = require('../shared');
 
 cloud.init({
   env: cloud.DYNAMIC_CURRENT_ENV
 });
 
 const db = cloud.database();
+const ADMINS = 'admins';
 
-exports.main = async (event) => {
+function ok(data = {}, message = 'ok') {
+  return {
+    success: true,
+    message,
+    data
+  };
+}
+
+function fail(message = '请求失败') {
+  return {
+    success: false,
+    message
+  };
+}
+
+async function getAdmin(openid) {
+  const { data } = await db
+    .collection(ADMINS)
+    .where({
+      openid
+    })
+    .limit(1)
+    .get();
+
+  const admin = data[0];
+  if (!admin || admin.active === false) {
+    return null;
+  }
+
+  return admin;
+}
+
+exports.main = async (event = {}) => {
   const action = event.action || 'status';
-  const wxContext = cloud.getWXContext();
+  const { OPENID } = cloud.getWXContext();
 
   try {
     if (action === 'status') {
-      const admin = await requireAdmin(wxContext.OPENID);
-      return success({
-        openid: wxContext.OPENID,
+      const [admin, countResult] = await Promise.all([
+        getAdmin(OPENID),
+        db.collection(ADMINS).count()
+      ]);
+
+      return ok({
+        openid: OPENID,
         isAdmin: Boolean(admin),
+        hasAnyAdmin: countResult.total > 0,
         admin: admin
           ? {
-              role: admin.role,
-              name: admin.name
+              name: admin.name || '管理员',
+              role: admin.role || 'admin',
+              mobile: admin.mobile || ''
             }
           : null
       });
     }
 
     if (action === 'bindFirstAdmin') {
-      const current = await db.collection(COLLECTIONS.ADMINS).limit(1).get();
-      if (current.data.length) {
-        return fail('管理员已初始化，请前往数据库中维护管理员列表');
+      const current = await db.collection(ADMINS).count();
+      if (current.total > 0) {
+        const existingAdmin = await getAdmin(OPENID);
+        if (existingAdmin) {
+          return ok({
+            openid: OPENID,
+            isAdmin: true,
+            admin: {
+              name: existingAdmin.name || '管理员',
+              role: existingAdmin.role || 'admin'
+            }
+          });
+        }
+
+        return fail('管理员已初始化，请在数据库 admins 集合中继续维护管理员账号');
       }
 
-      await db.collection(COLLECTIONS.ADMINS).add({
+      await db.collection(ADMINS).add({
         data: {
-          openid: wxContext.OPENID,
-          role: 'super_admin',
+          openid: OPENID,
           name: event.name || '超级管理员',
-          createdAt: new Date()
+          role: 'super_admin',
+          active: true,
+          createdAt: new Date(),
+          updatedAt: new Date()
         }
       });
 
-      return success({
-        openid: wxContext.OPENID,
-        isAdmin: true
-      });
+      return ok({
+        openid: OPENID,
+        isAdmin: true,
+        admin: {
+          name: event.name || '超级管理员',
+          role: 'super_admin'
+        }
+      }, '首个管理员绑定成功');
     }
 
     return fail('不支持的操作');

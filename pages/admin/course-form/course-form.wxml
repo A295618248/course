@@ -1,6 +1,6 @@
 <view class="page">
   <view class="card admin-hero">
-    <view class="admin-title">{{pageTitle}}</view>
+    <view class="admin-title">{{isEdit ? '编辑课程' : '新建课程'}}</view>
     <view class="admin-subtitle">维护课程信息、展示图片、授课安排和招生文案。</view>
   </view>
 
@@ -28,12 +28,23 @@
 
     <view class="field-row">
       <view class="field field-half">
-        <text class="field-label">价格</text>
+        <text class="field-label">价格文案</text>
+        <input class="input" value="{{form.priceText}}" data-field="priceText" bindinput="handleInput" placeholder="1680元 / 期" />
+      </view>
+      <view class="field field-half">
+        <text class="field-label">价格数值</text>
         <input class="input" type="digit" value="{{form.priceValue}}" data-field="priceValue" bindinput="handleInput" placeholder="1680" />
       </view>
+    </view>
+
+    <view class="field-row">
       <view class="field field-half">
         <text class="field-label">班型规模</text>
         <input class="input" value="{{form.classSize}}" data-field="classSize" bindinput="handleInput" placeholder="1对8小班" />
+      </view>
+      <view class="field field-half">
+        <text class="field-label">排序值</text>
+        <input class="input" type="number" value="{{form.sort}}" data-field="sort" bindinput="handleInput" placeholder="100" />
       </view>
     </view>
 
@@ -53,33 +64,38 @@
     </view>
 
     <view class="field">
+      <text class="field-label">标签（每行一条）</text>
+      <textarea class="textarea" value="{{form.tagsText}}" data-field="tagsText" bindinput="handleInput" placeholder="零基础友好&#10;小班教学&#10;支持试听" />
+    </view>
+
+    <view class="field">
       <text class="field-label">课程亮点（每行一条）</text>
-      <textarea class="textarea" value="{{highlightsText}}" bindinput="handleHighlightsInput" placeholder="例如：\n支持试听\n阶段成长报告" />
+      <textarea class="textarea" value="{{form.highlightsText}}" data-field="highlightsText" bindinput="handleInput" placeholder="例如：&#10;支持试听&#10;阶段成长报告" />
     </view>
 
     <view class="field">
       <text class="field-label">教学安排（每行一条）</text>
-      <textarea class="textarea" value="{{outlineText}}" bindinput="handleOutlineInput" placeholder="例如：\n第一阶段：基础线条训练\n第二阶段：主题创作" />
-    </view>
-
-    <view class="field">
-      <text class="field-label">标签（用中文逗号分隔）</text>
-      <input class="input" value="{{tagsText}}" bindinput="handleTagsInput" placeholder="零基础友好，小班教学，支持试听" />
+      <textarea class="textarea" value="{{form.outlineText}}" data-field="outlineText" bindinput="handleInput" placeholder="例如：&#10;第一阶段：基础线条训练&#10;第二阶段：主题创作" />
     </view>
 
     <view class="field">
       <text class="field-label">封面图片</text>
       <view class="upload-panel">
-        <image wx:if="{{form.coverImage}}" class="cover-preview" src="{{form.coverImage}}" mode="aspectFill"></image>
+        <image wx:if="{{coverPreview}}" class="cover-preview" src="{{coverPreview}}" mode="aspectFill"></image>
         <button class="button-secondary" bindtap="chooseImage">上传图片</button>
       </view>
     </view>
 
-    <view class="field">
-      <text class="field-label">发布状态</text>
-      <switch checked="{{form.published}}" color="#4f46e5" bindchange="handlePublishedChange" />
+    <view class="field-row">
+      <view class="field field-half">
+        <text class="field-label">发布状态</text>
+        <view class="status-row">
+          <view class="status-chip {{form.status === 'published' ? 'active' : ''}}" data-status="published" bindtap="chooseStatus">发布</view>
+          <view class="status-chip {{form.status === 'draft' ? 'active' : ''}}" data-status="draft" bindtap="chooseStatus">草稿</view>
+        </view>
+      </view>
     </view>
 
-    <button class="button-primary" bindtap="submitForm" loading="{{submitting}}">保存课程</button>
+    <button class="button-primary" bindtap="submit" loading="{{saving}}">保存课程</button>
   </view>
 </view>

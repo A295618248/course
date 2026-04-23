@@ -1,20 +1,21 @@
 const cloud = require('wx-server-sdk');
-const {
-  now,
-  getDb,
-  getOpenId,
-  assertRequired,
-  normalizeText,
-  normalizePhone,
-  buildError
-} = require('../shared');
 
 cloud.init({
   env: cloud.DYNAMIC_CURRENT_ENV
 });
 
-const db = getDb();
+const db = cloud.database();
 const _ = db.command;
+
+function trimValue(value) {
+  return String(value || '').trim();
+}
+
+function assertRequired(value, message) {
+  if (!trimValue(value)) {
+    throw new Error(message);
+  }
+}
 
 function validatePayload(data) {
   assertRequired(data.parentName, '请填写家长姓名');
@@ -23,29 +24,29 @@ function validatePayload(data) {
   assertRequired(data.preferredTime, '请选择意向时间');
   assertRequired(data.businessType, '请选择报名类型');
 
-  const phone = normalizePhone(data.phone);
+  const phone = trimValue(data.phone).replace(/\s+/g, '');
   if (!/^1\d{10}$/.test(phone)) {
-    throw buildError('请填写正确的手机号');
+    throw new Error('请填写正确的手机号');
   }
 
   const age = Number(data.age);
   if (!Number.isInteger(age) || age < 3 || age > 18) {
-    throw buildError('学员年龄需在 3-18 岁');
+    throw new Error('学员年龄需在 3-18 岁');
   }
 
   return {
-    parentName: normalizeText(data.parentName),
+    parentName: trimValue(data.parentName),
     phone,
-    studentName: normalizeText(data.studentName),
+    studentName: trimValue(data.studentName),
     age,
-    interest: normalizeText(data.interest),
-    preferredTime: normalizeText(data.preferredTime),
-    remark: normalizeText(data.remark),
-    businessType: data.businessType,
-    targetId: normalizeText(data.targetId),
-    targetTitle: normalizeText(data.targetTitle),
-    targetSubtitle: normalizeText(data.targetSubtitle),
-    sourceChannel: normalizeText(data.sourceChannel || 'miniprogram')
+    interest: trimValue(data.interest),
+    preferredTime: trimValue(data.preferredTime),
+    remark: trimValue(data.remark),
+    businessType: trimValue(data.businessType),
+    targetId: trimValue(data.targetId),
+    targetTitle: trimValue(data.targetTitle),
+    targetSubtitle: trimValue(data.targetSubtitle),
+    sourceChannel: trimValue(data.sourceChannel || 'miniprogram')
   };
 }
 
@@ -54,35 +55,33 @@ async function updateTargetEnrollment(record) {
     return;
   }
 
-  await db.collection('activities').where({
-    slug: record.targetId
-  }).update({
+  await db.collection('activities').doc(record.targetId).update({
     data: {
-      enrolledCount: _.inc(1),
-      updatedAt: now()
+      enrolled: _.inc(1),
+      updatedAt: new Date()
     }
   });
 }
 
-exports.main = async (event) => {
+exports.main = async (event = {}) => {
   try {
-    const payload = validatePayload(event || {});
-    const openId = getOpenId();
-    const timestamp = now();
+    const payload = validatePayload(event);
+    const { OPENID } = cloud.getWXContext();
+    const timestamp = new Date();
     const duplicateKey = `${payload.phone}_${payload.targetId || payload.businessType}`;
     const existing = await db.collection('signups').where({
       duplicateKey,
-      createdBy: openId
+      openid: OPENID
     }).count();
 
     if (existing.total > 0) {
-      throw buildError('您已经提交过相同报名，请勿重复提交');
+      throw new Error('您已经提交过相同报名，请勿重复提交');
     }
 
     const record = {
       ...payload,
       duplicateKey,
-      createdBy: openId,
+      openid: OPENID,
       status: 'new',
       followUpStatus: 'pending',
       createdAt: timestamp,
@@ -99,6 +98,9 @@ exports.main = async (event) => {
       success: true,
       data: {
         id: result._id,
+        createdAtText: `${timestamp.getFullYear()}-${String(timestamp.getMonth() + 1).padStart(2, '0')}-${String(
+          timestamp.getDate()
+        ).padStart(2, '0')} ${String(timestamp.getHours()).padStart(2, '0')}:${String(timestamp.getMinutes()).padStart(2, '0')}`,
         ...record
       }
     };

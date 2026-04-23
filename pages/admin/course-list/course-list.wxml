@@ -4,10 +4,10 @@
       <view class="admin-title">课程管理</view>
       <view class="admin-subtitle">发布新课程、编辑详情、控制上下架状态。</view>
     </view>
-    <button class="button-primary admin-small-button" bindtap="goCreate">新建课程</button>
+    <button class="button-primary admin-small-button" bindtap="createCourse">新建课程</button>
   </view>
 
-  <view class="admin-card" wx:for="{{courses}}" wx:key="id">
+  <view class="card admin-card" wx:for="{{courses}}" wx:key="id">
     <view class="admin-list-top">
       <view>
         <view class="admin-item-title">{{item.title}}</view>
@@ -19,8 +19,8 @@
     <view class="admin-list-bottom">
       <view class="admin-price">{{item.priceText}}</view>
       <view class="admin-actions">
-        <button class="button-secondary admin-mini-button" size="mini" data-id="{{item.id}}" bindtap="goEdit">编辑</button>
-        <button class="button-primary admin-mini-button" size="mini" data-id="{{item.id}}" bindtap="togglePublish">
+        <button class="button-secondary admin-mini-button" size="mini" data-item="{{item}}" bindtap="editCourse">编辑</button>
+        <button class="button-primary admin-mini-button" size="mini" data-item="{{item}}" bindtap="togglePublish">
           {{item.published ? '下架' : '发布'}}
         </button>
       </view>
