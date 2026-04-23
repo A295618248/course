@@ -1,0 +1,164 @@
+.hero {
+  padding: 36rpx;
+  background: linear-gradient(135deg, #253b89, #4d61dc);
+  color: #ffffff;
+}
+
+.hero-tag {
+  display: inline-block;
+  padding: 8rpx 18rpx;
+  border-radius: 999rpx;
+  background: rgba(255, 255, 255, 0.18);
+  font-size: 22rpx;
+}
+
+.hero-title {
+  margin-top: 18rpx;
+  font-size: 44rpx;
+  font-weight: 700;
+}
+
+.hero-desc {
+  margin-top: 16rpx;
+  font-size: 26rpx;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.hero-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18rpx;
+  margin-top: 28rpx;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18rpx;
+  margin-top: 24rpx;
+}
+
+.stat-card {
+  padding: 24rpx 18rpx;
+  text-align: center;
+}
+
+.stat-value {
+  display: block;
+  font-size: 38rpx;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.stat-label {
+  display: block;
+  margin-top: 8rpx;
+  font-size: 22rpx;
+  color: #6b7280;
+}
+
+.feature-list {
+  display: grid;
+  gap: 16rpx;
+}
+
+.feature-item {
+  display: flex;
+  gap: 16rpx;
+  padding: 24rpx;
+  border-radius: 22rpx;
+  background: #ffffff;
+}
+
+.feature-index {
+  width: 52rpx;
+  height: 52rpx;
+  line-height: 52rpx;
+  border-radius: 50%;
+  text-align: center;
+  background: #eef2ff;
+  color: #4338ca;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.feature-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #111827;
+}
+
+.feature-desc {
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  line-height: 1.6;
+  color: #6b7280;
+}
+
+.card-list {
+  display: grid;
+  gap: 18rpx;
+}
+
+.course-card,
+.activity-card {
+  padding: 28rpx;
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 18rpx;
+}
+
+.card-title {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #111827;
+}
+
+.card-meta {
+  margin-top: 10rpx;
+  font-size: 24rpx;
+  color: #6b7280;
+}
+
+.card-desc {
+  margin-top: 16rpx;
+  font-size: 25rpx;
+  line-height: 1.7;
+  color: #4b5563;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20rpx;
+}
+
+.price-text {
+  color: #4f46e5;
+  font-size: 28rpx;
+  font-weight: 700;
+}
+
+.remaining-text {
+  color: #c66a16;
+  font-size: 24rpx;
+}
+
+.cta-card {
+  padding: 32rpx;
+  margin-top: 24rpx;
+}
+
+.cta-desc {
+  margin-top: 12rpx;
+  margin-bottom: 20rpx;
+  font-size: 25rpx;
+  line-height: 1.7;
+  color: #6b7280;
+}

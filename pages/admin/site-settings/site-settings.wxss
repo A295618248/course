@@ -1,0 +1,20 @@
+.page {
+  padding-bottom: 40rpx;
+}
+
+.settings-card {
+  padding: 32rpx;
+}
+
+.upload-panel {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.preview-image {
+  width: 200rpx;
+  height: 120rpx;
+  border-radius: 20rpx;
+  background: #f5f7fb;
+}

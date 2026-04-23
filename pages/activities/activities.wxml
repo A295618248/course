@@ -1,0 +1,56 @@
+<view class="page">
+  <view class="card hero">
+    <view class="hero-title">近期活动</view>
+    <view class="hero-desc">通过展览、体验营和开放日，让家长更快感知机构教学氛围与课程成果。</view>
+  </view>
+
+  <scroll-view class="filter-row" scroll-x show-scrollbar="{{false}}">
+    <view
+      wx:for="{{tabs}}"
+      wx:key="*this"
+      class="filter-chip {{activeTab === item ? 'active' : ''}}"
+      data-tab="{{item}}"
+      bindtap="switchTab"
+    >
+      {{item}}
+    </view>
+  </scroll-view>
+
+  <view class="section-header">
+    <view>
+      <view class="section-title">活动列表</view>
+      <view class="section-subtitle">共 {{filteredActivities.length}} 场活动</view>
+    </view>
+  </view>
+
+  <view class="activity-list">
+    <view
+      wx:for="{{filteredActivities}}"
+      wx:key="id"
+      class="card activity-card"
+      data-id="{{item.id}}"
+      bindtap="openDetail"
+    >
+      <view class="activity-top">
+        <view>
+          <view class="activity-title">{{item.title}}</view>
+          <view class="activity-meta">{{item.date}} {{item.time}} · {{item.location}}</view>
+        </view>
+        <view class="tag {{item.status === '报名中' ? 'tag-success' : 'tag-warm'}}">{{item.status}}</view>
+      </view>
+
+      <view class="activity-summary">{{item.summary}}</view>
+
+      <view class="activity-footer">
+        <view class="activity-pills">
+          <view class="tag">{{item.type}}</view>
+          <view class="tag tag-warm">剩余 {{item.remaining}} / {{item.capacity}}</view>
+        </view>
+        <view class="footer-actions">
+          <button class="mini-action button-secondary" size="mini" data-id="{{item.id}}" catchtap="openDetail">详情</button>
+          <button class="mini-action button-primary" size="mini" data-id="{{item.id}}" catchtap="goSignup">报名</button>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

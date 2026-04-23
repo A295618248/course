@@ -1,0 +1,264 @@
+page {
+  background: #f6f7fb;
+  color: #1f2937;
+  font-family: "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+  font-size: 28rpx;
+}
+
+.page {
+  min-height: 100vh;
+  padding: 24rpx 24rpx 40rpx;
+  box-sizing: border-box;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 28rpx;
+  box-shadow: 0 14rpx 32rpx rgba(15, 23, 42, 0.06);
+  box-sizing: border-box;
+}
+
+.section {
+  margin-top: 24rpx;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.section-title {
+  font-size: 34rpx;
+  font-weight: 700;
+  color: #111827;
+}
+
+.section-subtitle {
+  margin-top: 10rpx;
+  font-size: 24rpx;
+  color: #6b7280;
+}
+
+.link-text {
+  color: #4f46e5;
+  font-size: 24rpx;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10rpx 18rpx;
+  border-radius: 999rpx;
+  background: #eef2ff;
+  color: #4338ca;
+  font-size: 22rpx;
+}
+
+.tag-warm {
+  background: #fff4e8;
+  color: #c66a16;
+}
+
+.tag-success {
+  background: #eafaf0;
+  color: #18864b;
+}
+
+.button-primary,
+.button-secondary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 88rpx;
+  border-radius: 22rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+}
+
+.button-primary {
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: #ffffff;
+}
+
+.button-secondary {
+  background: #ffffff;
+  color: #4f46e5;
+  border: 2rpx solid #d9dcff;
+}
+
+.button-primary::after,
+.button-secondary::after {
+  border: none;
+}
+
+.field {
+  margin-bottom: 24rpx;
+}
+
+.field-label {
+  display: block;
+  margin-bottom: 14rpx;
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #111827;
+}
+
+.input,
+.picker-box,
+.textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 24rpx;
+  border-radius: 18rpx;
+  background: #f9fafb;
+  border: 2rpx solid #e5e7eb;
+  color: #111827;
+  font-size: 28rpx;
+}
+
+.textarea {
+  min-height: 180rpx;
+}
+
+.muted {
+  color: #6b7280;
+}
+
+.empty-state {
+  padding: 56rpx 32rpx;
+  text-align: center;
+  color: #6b7280;
+}
+
+.admin-page {
+  min-height: 100vh;
+  padding: 24rpx;
+  box-sizing: border-box;
+  background: #f4f6fb;
+}
+
+.admin-hero {
+  padding: 32rpx;
+  background: linear-gradient(135deg, #111827, #374151);
+  color: #ffffff;
+}
+
+.admin-title {
+  font-size: 40rpx;
+  font-weight: 700;
+}
+
+.admin-desc {
+  margin-top: 12rpx;
+  font-size: 24rpx;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.admin-grid {
+  display: grid;
+  gap: 18rpx;
+  margin-top: 24rpx;
+}
+
+.admin-grid-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.admin-card {
+  background: #ffffff;
+  border-radius: 24rpx;
+  padding: 28rpx;
+  box-shadow: 0 12rpx 30rpx rgba(15, 23, 42, 0.06);
+  box-sizing: border-box;
+}
+
+.admin-card-title {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #111827;
+}
+
+.admin-card-desc {
+  margin-top: 10rpx;
+  font-size: 24rpx;
+  line-height: 1.7;
+  color: #6b7280;
+}
+
+.admin-stat-value {
+  display: block;
+  margin-top: 18rpx;
+  font-size: 46rpx;
+  font-weight: 700;
+  color: #4f46e5;
+}
+
+.admin-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+  margin-top: 24rpx;
+}
+
+.admin-list {
+  display: grid;
+  gap: 18rpx;
+  margin-top: 24rpx;
+}
+
+.admin-item-title {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #111827;
+}
+
+.admin-item-meta {
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  color: #6b7280;
+  line-height: 1.7;
+}
+
+.admin-item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16rpx;
+}
+
+.admin-item-actions {
+  display: flex;
+  gap: 14rpx;
+  margin-top: 20rpx;
+}
+
+.admin-mini-button {
+  min-width: 140rpx;
+  height: 68rpx;
+  line-height: 68rpx;
+  border-radius: 18rpx;
+  font-size: 24rpx;
+  padding: 0 20rpx;
+}
+
+.admin-mini-button::after {
+  border: none;
+}
+
+.admin-empty {
+  text-align: center;
+  color: #6b7280;
+  padding: 48rpx 24rpx;
+}
+
+.cover-preview {
+  width: 100%;
+  height: 240rpx;
+  margin-top: 18rpx;
+  border-radius: 20rpx;
+  background: #eef2ff;
+}

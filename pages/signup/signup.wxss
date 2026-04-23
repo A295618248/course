@@ -1,0 +1,35 @@
+.hero-card {
+  padding: 34rpx;
+}
+
+.hero-title {
+  display: block;
+  font-size: 38rpx;
+  font-weight: 700;
+  color: #111827;
+  margin-top: 12rpx;
+}
+
+.hero-subtitle {
+  display: block;
+  margin-top: 12rpx;
+  font-size: 26rpx;
+  line-height: 1.7;
+  color: #6b7280;
+}
+
+.hero-meta {
+  display: block;
+  margin-top: 16rpx;
+  font-size: 24rpx;
+  color: #4b5563;
+}
+
+.form-card,
+.tips-card {
+  padding: 32rpx;
+}
+
+.submit-button {
+  margin-top: 12rpx;
+}

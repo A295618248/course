@@ -1,0 +1,58 @@
+<view class="page">
+  <view class="card hero-card">
+    <text class="tag">{{target.businessType === 'course' ? '课程报名' : target.businessType === 'activity' ? '活动报名' : '咨询预约'}}</text>
+    <text class="hero-title">{{target.title}}</text>
+    <text class="hero-subtitle">{{target.subtitle}}</text>
+    <text class="hero-meta">{{target.extra}}</text>
+  </view>
+
+  <view class="card form-card section">
+    <view class="section-title">填写报名信息</view>
+
+    <view class="field">
+      <text class="field-label">家长姓名</text>
+      <input class="input" placeholder="例如：王女士" value="{{form.parentName}}" data-field="parentName" bindinput="handleInput" />
+    </view>
+
+    <view class="field">
+      <text class="field-label">联系电话</text>
+      <input class="input" type="number" maxlength="11" placeholder="请输入 11 位手机号" value="{{form.phone}}" data-field="phone" bindinput="handleInput" />
+    </view>
+
+    <view class="field">
+      <text class="field-label">学员姓名</text>
+      <input class="input" placeholder="例如：小雨" value="{{form.studentName}}" data-field="studentName" bindinput="handleInput" />
+    </view>
+
+    <view class="field">
+      <text class="field-label">学员年龄</text>
+      <input class="input" type="number" maxlength="2" placeholder="请输入 3-18 岁" value="{{form.studentAge}}" data-field="studentAge" bindinput="handleInput" />
+    </view>
+
+    <view class="field">
+      <text class="field-label">兴趣方向</text>
+      <input class="input" placeholder="例如：创意美术 / 书法 / 陶艺" value="{{form.interest}}" data-field="interest" bindinput="handleInput" />
+    </view>
+
+    <view class="field">
+      <text class="field-label">意向到访时间</text>
+      <picker mode="selector" range="{{visitOptions}}" value="{{visitIndex}}" bindchange="handleVisitChange">
+        <view class="picker-box">{{visitOptions[visitIndex]}}</view>
+      </picker>
+    </view>
+
+    <view class="field">
+      <text class="field-label">补充说明</text>
+      <textarea class="textarea" placeholder="可填写孩子基础、想体验的课程或希望咨询的问题" value="{{form.remark}}" data-field="remark" bindinput="handleInput" />
+    </view>
+  </view>
+
+  <view class="card tips-card section">
+    <view class="section-title">报名说明</view>
+    <view class="muted">1. 提交后，课程顾问会在工作时间尽快电话联系。</view>
+    <view class="muted">2. 报名数据会写入微信云开发数据库，可在“报名中心”页查看记录。</view>
+    <view class="muted">3. 课程和活动都支持从详情页直接进入本表单。</view>
+  </view>
+
+  <button class="button-primary submit-button" bindtap="submitSignup">确认提交</button>
+</view>

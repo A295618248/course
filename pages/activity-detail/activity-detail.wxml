@@ -1,0 +1,66 @@
+<view class="page">
+  <view wx:if="{{activity}}">
+    <view class="card hero">
+      <view class="hero__top">
+        <view>
+          <view class="hero__title">{{activity.title}}</view>
+          <view class="hero__meta">
+            <text class="tag">{{activity.type}}</text>
+            <text class="hero__meta-text">{{activity.date}} {{activity.time}}</text>
+          </view>
+        </view>
+        <text class="tag {{activity.status === '报名中' ? 'tag-success' : 'tag-warm'}}">{{activity.status}}</text>
+      </view>
+      <view class="hero__desc">{{activity.summary}}</view>
+      <view class="hero__info">
+        <view class="hero__info-item">
+          <text class="hero__info-label">活动地点</text>
+          <text class="hero__info-value">{{activity.location}}</text>
+        </view>
+        <view class="hero__info-item">
+          <text class="hero__info-label">活动费用</text>
+          <text class="hero__info-value">{{activity.fee}}</text>
+        </view>
+        <view class="hero__info-item">
+          <text class="hero__info-label">剩余名额</text>
+          <text class="hero__info-value">{{activity.remaining}} / {{activity.capacity}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="card section-card">
+      <view class="section-title">活动介绍</view>
+      <view class="section-desc">{{activity.description}}</view>
+    </view>
+
+    <view class="card section-card">
+      <view class="section-title">流程安排</view>
+      <view class="agenda-list">
+        <view class="agenda-item" wx:for="{{activity.agenda}}" wx:key="*this">
+          <text class="agenda-dot"></text>
+          <text class="agenda-text">{{item}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="card section-card">
+      <view class="section-title">报名须知</view>
+      <view class="notice-line">1. 活动名额有限，提交后将由老师电话确认。</view>
+      <view class="notice-line">2. 如需团体报名或合作共创，可在备注中说明人数和需求。</view>
+      <view class="notice-line">3. 报名成功后可在“报名中心”查看记录。</view>
+    </view>
+
+    <view class="footer-space"></view>
+    <view class="footer-bar">
+      <view>
+        <view class="footer-bar__label">当前活动</view>
+        <view class="footer-bar__value">{{activity.title}}</view>
+      </view>
+      <button class="button-primary" bindtap="handleSignup">立即报名</button>
+    </view>
+  </view>
+
+  <view wx:else class="empty-state">
+    未找到活动信息
+  </view>
+</view>

@@ -1,0 +1,9 @@
+{
+  "name": "xinghe-art-center-cloudfunctions",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Cloud functions for Xinghe Art Center mini program",
+  "dependencies": {
+    "wx-server-sdk": "latest"
+  }
+}

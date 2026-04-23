@@ -1,0 +1,95 @@
+<view class="page">
+  <view class="card admin-hero">
+    <view class="admin-title">{{isEdit ? '编辑活动' : '新建活动'}}</view>
+    <view class="admin-subtitle">维护活动时间、地点、状态、名额与详情描述。</view>
+  </view>
+
+  <view class="card admin-form section">
+    <view class="field">
+      <text class="field-label">活动标题</text>
+      <input class="input" value="{{form.title}}" data-field="title" bindinput="handleInput" placeholder="例如：周末亲子陶艺体验营" />
+    </view>
+
+    <view class="field-row">
+      <view class="field field-half">
+        <text class="field-label">活动类型</text>
+        <input class="input" value="{{form.type}}" data-field="type" bindinput="handleInput" placeholder="体验活动" />
+      </view>
+      <view class="field field-half">
+        <text class="field-label">状态</text>
+        <input class="input" value="{{form.status}}" data-field="status" bindinput="handleInput" placeholder="报名中 / 余位不多 / 已结束" />
+      </view>
+    </view>
+
+    <view class="field-row">
+      <view class="field field-half">
+        <text class="field-label">日期</text>
+        <input class="input" value="{{form.date}}" data-field="date" bindinput="handleInput" placeholder="2026-06-01" />
+      </view>
+      <view class="field field-half">
+        <text class="field-label">时间</text>
+        <input class="input" value="{{form.time}}" data-field="time" bindinput="handleInput" placeholder="10:00-12:00" />
+      </view>
+    </view>
+
+    <view class="field">
+      <text class="field-label">活动地点</text>
+      <input class="input" value="{{form.location}}" data-field="location" bindinput="handleInput" placeholder="例如：星河艺术中心陶艺教室" />
+    </view>
+
+    <view class="field-row">
+      <view class="field field-half">
+        <text class="field-label">总名额</text>
+        <input class="input" type="number" value="{{form.capacity}}" data-field="capacity" bindinput="handleInput" placeholder="24" />
+      </view>
+      <view class="field field-half">
+        <text class="field-label">已报名</text>
+        <input class="input" type="number" value="{{form.enrolled}}" data-field="enrolled" bindinput="handleInput" placeholder="10" />
+      </view>
+    </view>
+
+    <view class="field">
+      <text class="field-label">活动费用</text>
+      <input class="input" value="{{form.fee}}" data-field="fee" bindinput="handleInput" placeholder="免费 / 198元 / 组" />
+    </view>
+
+    <view class="field">
+      <text class="field-label">活动摘要</text>
+      <textarea class="textarea" value="{{form.summary}}" data-field="summary" bindinput="handleInput" placeholder="用于列表页的短介绍" />
+    </view>
+
+    <view class="field">
+      <text class="field-label">活动详情</text>
+      <textarea class="textarea textarea-large" value="{{form.description}}" data-field="description" bindinput="handleInput" placeholder="详细描述活动亮点和适合人群" />
+    </view>
+
+    <view class="field">
+      <text class="field-label">流程安排（每行一条）</text>
+      <textarea class="textarea" value="{{form.agendaText}}" data-field="agendaText" bindinput="handleInput" placeholder="例如：&#10;10:00 签到&#10;10:30 体验开始" />
+    </view>
+
+    <view class="field">
+      <text class="field-label">封面图片</text>
+      <view class="upload-panel">
+        <image wx:if="{{coverPreview}}" class="cover-preview" src="{{coverPreview}}" mode="aspectFill"></image>
+        <button class="button-secondary" bindtap="chooseImage">上传活动图片</button>
+      </view>
+    </view>
+
+    <view class="field-row">
+      <view class="field field-half">
+        <text class="field-label">排序值</text>
+        <input class="input" type="number" value="{{form.sort}}" data-field="sort" bindinput="handleInput" placeholder="100" />
+      </view>
+      <view class="field field-half">
+        <text class="field-label">发布状态</text>
+        <view class="status-row">
+          <view class="status-chip {{form.published ? 'status-chip--active' : ''}}" data-published="true" bindtap="choosePublished">发布</view>
+          <view class="status-chip {{!form.published ? 'status-chip--active' : ''}}" data-published="false" bindtap="choosePublished">草稿</view>
+        </view>
+      </view>
+    </view>
+
+    <button class="button-primary" loading="{{saving}}" bindtap="submit">保存活动</button>
+  </view>
+</view>

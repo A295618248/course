@@ -1,0 +1,59 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/courses/courses",
+    "pages/activities/activities",
+    "pages/profile/profile",
+    "pages/course-detail/course-detail",
+    "pages/activity-detail/activity-detail",
+    "pages/signup/signup"
+  ],
+  "subPackages": [
+    {
+      "root": "pages/admin",
+      "name": "admin",
+      "pages": [
+        "dashboard/dashboard",
+        "course-list/course-list",
+        "course-form/course-form",
+        "activity-list/activity-list",
+        "activity-form/activity-form",
+        "signups/signups",
+        "site-settings/site-settings"
+      ]
+    }
+  ],
+  "window": {
+    "navigationBarTitleText": "星河艺术中心",
+    "navigationBarBackgroundColor": "#fff7f1",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#f7f7fb",
+    "backgroundTextStyle": "light"
+  },
+  "tabBar": {
+    "color": "#7a6d66",
+    "selectedColor": "#d66a3c",
+    "backgroundColor": "#fffaf7",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/courses/courses",
+        "text": "课程"
+      },
+      {
+        "pagePath": "pages/activities/activities",
+        "text": "活动"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "报名"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}
